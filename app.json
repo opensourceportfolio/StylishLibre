@@ -1,0 +1,17 @@
+{
+  "name": "StylishLibre",
+  "displayName": "StylishLibre",
+  "expo": {
+    "name": "StylishLibre",
+    "slug": "StylishLibre",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
