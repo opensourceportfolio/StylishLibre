@@ -1,5 +1,5 @@
+import { Icon, InputProps, Input } from "@ui-kitten/components";
 import * as React from "react";
-import { Icon, Input, InputProps } from "@ui-kitten/components";
 import { TouchableWithoutFeedback } from "react-native";
 
 const AlertIcon = () => <Icon name="alert-circle-outline" />;
@@ -22,12 +22,12 @@ export default function Password(props: InputProps) {
 
   return (
     <Input
-      accessoryRight={() => renderIcon(toggleSecureEntry, secureTextEntry)}
+      autoCompleteType="password"
       caption={props.caption}
-      captionIcon={AlertIcon}
       onChangeText={props.onChangeText}
       placeholder="Password"
-      secureTextEntry={secureTextEntry}
+      secureTextEntry={true}
+      textContentType="password"
       style={props.style}
       value={props.value}
     />

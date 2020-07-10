@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 import { Status } from "../api/fetch";
 import ErrorModal from "../component/ErrorModal";
 import useAsyncScreen, { ResetStatusFn } from "../hook/useAsyncScreen";
@@ -16,13 +16,14 @@ export default function AsyncScreen<T>(props: Props<T>) {
     props.initialState,
     props.api
   );
+
   return (
-    <View style={styles.centeredView}>
+    <SafeAreaView style={styles.centeredView}>
       {props.children(screenStatus, resetScreenStatus)}
       {screenStatus == Status.failure && (
         <ErrorModal onDismiss={resetScreenStatus}></ErrorModal>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 

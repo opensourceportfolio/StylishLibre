@@ -1,10 +1,10 @@
 // Colors
-const yellow200 = "#FFF59D";
-const deepOrange600 = "#F4511E";
-const lime300 = "#DCE775";
-const lightGreen500 = "#8BC34A";
-const teal700 = "#00796B";
-const cyan900 = "#006064";
+export const yellow200 = "#FFF59D";
+export const deepOrange600 = "#F4511E";
+export const lime300 = "#DCE775";
+export const lightGreen500 = "#8BC34A";
+export const teal700 = "#00796B";
+export const cyan900 = "#006064";
 const colors = [
   yellow200,
   lime300,

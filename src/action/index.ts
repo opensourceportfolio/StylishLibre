@@ -4,13 +4,11 @@ import { success } from "../api/fetch";
 import { getGlucoseData } from "../api/getGlucoseData";
 import { login } from "../api/login";
 import { PayloadAction } from "../model/action";
-import ChartDay from "../model/chart/chart-day";
+import { GlucoseData } from "../model/api/glucose-data";
 import { PersistentState } from "../model/persistent-state";
 import { Attempt } from "../model/response";
 import { State } from "../model/state";
 import { deleteState, readState } from "../store/persistent-state";
-import { toChartDays } from "../transformation/api";
-import { GlucoseData } from "../model/api/glucose-data";
 
 type ThunkAction<T extends Action, R> = ReduxThunkAction<
   Attempt<R>,
@@ -100,8 +98,6 @@ export function appLogoutAsyncAction(): ThunkAction<AppLogoutAction, void> {
 }
 
 export function getGlucoseAsyncAction(
-  minGlucose: number,
-  maxGlucose: number,
   token: string | undefined
 ): ThunkAction<AppUpdateAction, GlucoseData[]> {
   return async (dispatch, getState) => {
@@ -117,6 +113,8 @@ export function getGlucoseAsyncAction(
         const successState = {
           glucoseData: glucoseDataAttempt.data,
         };
+        console.log({ successState });
+
         dispatch(appUpdateAction({ ...successState }));
 
         return glucoseDataAttempt;

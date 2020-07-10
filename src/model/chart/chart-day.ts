@@ -8,6 +8,8 @@ export default interface ChartDay {
   inRange: number;
   max: number;
   min: number;
+  last: number;
+  standardDeviation: number,
   sensorScans: ChartPoint[];
   start: number;
 }

@@ -2,7 +2,8 @@ import { DataPoint, GlucoseData } from "../../model/api/glucose-data";
 import ChartDay from "../../model/chart/chart-day";
 import ChartPoint from "../../model/chart/chart-point";
 import ChartRange from "../../model/chart/chart-range";
-import { countIf, max, min, sum } from "../collection";
+import ChartStream from "../../model/chart/chart-stream";
+import { countIf, last, max, min, sum, standardDeviation } from "../collection";
 
 export function toChartDays(
   minGlucose: number,
@@ -14,6 +15,32 @@ export function toChartDays(
 
       return chartDay ? [chartDay] : [];
     });
+}
+
+export function toChartStream(
+  minGlucose: number,
+  maxGlucose: number
+): (gs: GlucoseData[]) => ChartStream {
+  return (glucoseData: GlucoseData[]) => {
+    const chartDays = toChartDays(minGlucose, maxGlucose)(glucoseData);
+    const emptyChartStream: ChartStream = {
+      chartRanges: [],
+      start: Number.POSITIVE_INFINITY,
+      end: 0,
+      min: Number.POSITIVE_INFINITY,
+      max: 0,
+    };
+
+    return chartDays.reduce((chartStream, day) => {
+      return {
+        chartRanges: [...chartStream.chartRanges, ...day.chartRanges],
+        start: Math.min(chartStream.start, day.start),
+        end: Math.max(chartStream.end, day.end),
+        min: Math.min(chartStream.min, day.min),
+        max: Math.max(chartStream.max, day.max),
+      };
+    }, emptyChartStream);
+  };
 }
 
 function toChartDay(
@@ -55,16 +82,22 @@ function toChartDay(
 
     return chartRanges.length > 0
       ? {
+        average: glucoseData.AverageGlucose,
+        chartRanges,
+        end: chartRanges[chartRanges.length - 1].end,
+        min: min((c) => c.min, chartRanges),
+        max: max((c) => c.max, chartRanges),
+        last: last(
+          (c) => last((g) => g.glucose, c.glucoseReading, 0),
           chartRanges,
-          start: chartRanges[0].start,
-          end: chartRanges[chartRanges.length - 1].end,
-          min: min((c) => c.min, chartRanges),
-          max: max((c) => c.max, chartRanges),
-          average: glucoseData.AverageGlucose,
-          sensorScans,
-          inRange:
-            totalChartPoints === 0 ? 0 : inRangeChartPoints / totalChartPoints,
-        }
+          0
+        ),
+        standardDeviation: standardDeviation(glucoseData.AverageGlucose, glucosePoints.flatMap(gps => gps.map(gp => gp.glucose))),
+        start: chartRanges[0].start,
+        sensorScans,
+        inRange:
+          totalChartPoints === 0 ? 0 : inRangeChartPoints / totalChartPoints,
+      }
       : null;
   };
 }

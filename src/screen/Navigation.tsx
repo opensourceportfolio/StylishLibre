@@ -1,17 +1,25 @@
-import * as React from "react";
 import { AntDesign } from "@expo/vector-icons";
+import {
+  BottomTabNavigationOptions,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import { NavigationContainer, RouteProp } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  createBottomTabNavigator,
-  BottomTabNavigationOptions,
-} from "@react-navigation/bottom-tabs";
-import LoginScreen from "./LoginScreen";
-import MainScreen from "./MainScreen";
+import * as React from "react";
+import { KeyboardAvoidingView, Platform } from "react-native";
 import useAppState from "../hook/useAppState";
-import SplashScreen from "./SplashScreen";
 import AppState from "../model/app-state";
 import AccountScreen from "./AccountScreen";
+import LoginScreen from "./LoginScreen";
+import MainScreen from "./MainScreen";
+import SplashScreen from "./SplashScreen";
+import ChartScreen from "./ChartScreen";
+
+export type RootStackParamList = {
+  Home: undefined;
+  Chart: undefined;
+  Login: undefined;
+};
 
 type ScreenOptions = ({
   route,
@@ -19,7 +27,7 @@ type ScreenOptions = ({
   route: RouteProp<Record<string, object | undefined>, string>;
 }) => BottomTabNavigationOptions;
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
 
 const screenOptions: ScreenOptions = ({ route }) => ({
@@ -52,14 +60,22 @@ export default function Navigation(): JSX.Element | null {
   return state.appState === AppState.notStarted ? (
     <SplashScreen />
   ) : (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {state.appState === AppState.login ? (
-          <Stack.Screen name="Login" component={LoginScreen} />
-        ) : (
-          <Stack.Screen name="Home" component={MainDrawer} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+    >
+      <NavigationContainer>
+        <Stack.Navigator headerMode="none">
+          {state.appState === AppState.login ? (
+            <Stack.Screen name="Login" component={LoginScreen} />
+          ) : (
+            <React.Fragment>
+              <Stack.Screen name="Home" component={MainDrawer} />
+              <Stack.Screen name="Chart" component={ChartScreen} />
+            </React.Fragment>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </KeyboardAvoidingView>
   );
 }

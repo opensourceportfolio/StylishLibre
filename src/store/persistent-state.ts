@@ -12,9 +12,10 @@ function safeJsonParse<T>(input: string | null): T | null {
 export const key = "@StylishLibre/appConfig";
 
 export function readState(): Promise<PersistentState | null> {
-  return AsyncStorage.getItem("@StylishLibre/appConfig").then((res) => {
-    return safeJsonParse<PersistentState>(res);
-  });
+  return AsyncStorage.getItem("@StylishLibre/appConfig")
+    .then((res) => {
+      return safeJsonParse<PersistentState>(res);
+    });
 }
 
 export async function writeState(state: Partial<PersistentState>) {
@@ -23,7 +24,6 @@ export async function writeState(state: Partial<PersistentState>) {
     ...currentState,
     ...state,
   };
-
 
   return AsyncStorage.setItem(key, JSON.stringify(newState));
 }

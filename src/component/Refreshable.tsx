@@ -1,16 +1,15 @@
 import React from "react";
 import {
-  ScrollView,
   RefreshControl,
-  StyleSheet,
   SafeAreaView,
+  ScrollView,
+  StyleSheet,
 } from "react-native";
-import Constants from "expo-constants";
 
 interface Props {
-  children: JSX.Element,
-  refreshing: boolean,
-  onRefresh: () => void
+  children: JSX.Element;
+  refreshing: boolean;
+  onRefresh: () => void;
 }
 
 export default function Refreshable(props: Props) {
@@ -21,7 +20,10 @@ export default function Refreshable(props: Props) {
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => onRefresh()}
+          />
         }
       >
         {children}
@@ -33,7 +35,6 @@ export default function Refreshable(props: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
   },
   scrollView: {
     flex: 1,

@@ -1,6 +1,6 @@
 import { GlucoseData } from "../../model/api/glucose-data";
 import { Attempt } from "../../model/response";
-import { json, failure } from "../fetch";
+import { failure, json } from "../fetch";
 
 export async function getGlucoseData(token: string): Attempt<GlucoseData[]> {
   try {
@@ -20,9 +20,13 @@ export async function getGlucoseData(token: string): Attempt<GlucoseData[]> {
       }
     );
 
-    console.log("getGlucoseData", { type: (await res).type });
+    const data = await res;
 
-    return res;
+    // console.log("getGlucoseData", { type: data.type });
+
+    console.log("getGlucoseData done");
+
+    return data;
   } catch (e) {
     console.log("getGlucoseData failed");
 

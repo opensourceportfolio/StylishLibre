@@ -1,19 +1,17 @@
 import { Entypo, Feather } from "@expo/vector-icons";
 import { Button, Divider, Input, Text } from "@ui-kitten/components";
 import * as React from "react";
-import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { appLogoutAsyncAction, appUpdateAction } from "../action";
 import ListItem from "../component/ListItem";
 import useAppState from "../hook/useAppState";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AccountScreen() {
   const [{ email, minimumGlucose, maximumGlucose }, dispatch] = useAppState();
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={styles.accountScreen}
-    >
+    <SafeAreaView style={styles.accountScreen}>
       <View>
         <ListItem
           accessoryLeft={<Entypo name="email" size={24} color="black" />}
@@ -75,7 +73,7 @@ export default function AccountScreen() {
       >
         Logout
       </Button>
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
@@ -89,5 +87,6 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     margin: 20,
+    marginBottom: 60,
   },
 });

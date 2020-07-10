@@ -1,7 +1,7 @@
 enum AppState {
-  notStarted,
-  login,
-  main
+  notStarted = 0,
+  login = 1,
+  main = 2
 }
 
 export default AppState;

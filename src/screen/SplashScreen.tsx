@@ -1,11 +1,12 @@
 import * as React from "react";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SplashScreen() {
   return (
-    <View style={styles.spinner}>
+    <SafeAreaView style={styles.spinner}>
       <ActivityIndicator></ActivityIndicator>
-    </View>
+    </SafeAreaView>
   );
 }
 

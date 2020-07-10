@@ -28,6 +28,7 @@ export const StoreProvider = (props: Props) => {
     1000
   );
 
+
   useEffect(() => {
     const unsubscribe = store.subscribe(writeStateThrottled);
     dispatch(persistenceStorageLoadingAsyncAction());

@@ -4,7 +4,7 @@ import AppState from "../model/app-state";
 import defaultState, { State } from "../model/state";
 
 const partialState = (state: State): Partial<State> => {
-  const { chartDays, ...rest } = state;
+  const { glucoseData: _, ...rest } = state;
   return rest;
 };
 
