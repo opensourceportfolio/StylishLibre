@@ -1,10 +1,10 @@
-import { Card, Text } from "@ui-kitten/components";
-import * as React from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
-import useGlucoseRange from "../../hook/useGlucoseRange";
-import ChartDay from "../../model/chart/chart-day";
-import { round } from "../../transformation/number";
-import LineChart from "../chart/LineChart";
+import { Card, Text } from '@ui-kitten/components';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
+
+import ChartDay from '../../model/chart/chart-day';
+import { round } from '../../transformation/number';
+import LineChart from '../chart/LineChart';
 
 interface Props {
   chartDay: ChartDay | null;
@@ -13,7 +13,6 @@ interface Props {
 
 export default function GlucoseStandardDeviation(props: Props) {
   const { chartDay, chartDays } = props;
-  const [minGlucose, maxGlucose] = useGlucoseRange();
   const data = chartDays?.map((c) => ({ x: c.start, y: c.standardDeviation }));
 
   return (
@@ -22,7 +21,7 @@ export default function GlucoseStandardDeviation(props: Props) {
         <View>
           <Text category="c2">Standard Deviation</Text>
           <Text category="h1">
-            {chartDay ? round(chartDay.standardDeviation) : "-"}
+            {chartDay ? round(chartDay.standardDeviation) : '-'}
           </Text>
         </View>
         <View>{data && <LineChart data={data}></LineChart>}</View>
@@ -33,9 +32,9 @@ export default function GlucoseStandardDeviation(props: Props) {
 
 const styles = StyleSheet.create({
   cardLayout: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   card: {
     marginBottom: 10,

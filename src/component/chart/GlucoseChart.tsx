@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Dimensions } from "react-native";
+import React, { useState } from 'react';
+import { Dimensions } from 'react-native';
 import {
   VictoryArea,
   VictoryAxis,
@@ -7,12 +7,13 @@ import {
   VictoryCursorContainer,
   VictoryLabel,
   VictoryStack,
-} from "victory-native";
-import useGlucoseRange from "../../hook/useGlucoseRange";
-import ChartDay from "../../model/chart/chart-day";
-import ChartPoint from "../../model/chart/chart-point";
-import { formatHour, getHour, getHourRange } from "../../transformation/date";
-import theme from "./theme";
+} from 'victory-native';
+
+import useGlucoseRange from '../../hook/useGlucoseRange';
+import ChartDay from '../../model/chart/chart-day';
+import ChartPoint from '../../model/chart/chart-point';
+import { formatHour, getHour, getHourRange } from '../../transformation/date';
+import theme from './theme';
 
 interface ActivePointState {
   lastChartPoint: ChartPoint;
@@ -28,8 +29,9 @@ interface Props {
 
 function pointEstimator(chartDay: ChartDay) {
   const allGlucoseReadings = chartDay.chartRanges.flatMap(
-    (crs) => crs.glucoseReading
+    (crs) => crs.glucoseReading,
   );
+
   return (approximateTime: number, lastActivePoint: ActivePointState) => {
     const step =
       approximateTime > lastActivePoint.lastChartPoint.timestamp ? 1 : -1;
@@ -64,7 +66,7 @@ export default function GlucoseChart(props: Props) {
   const { chartRanges } = chartDay;
   const [minimumGlucose, maximumGlucose] = useGlucoseRange();
   const height = fullScreen ? 500 : 200;
-  const width = Dimensions.get("window").width;
+  const width = Dimensions.get('window').width;
   const estimatePoint = pointEstimator(chartDay);
   const [activePoint, setActivePoint] = useState<ActivePointState>({
     index: 0,
@@ -76,8 +78,8 @@ export default function GlucoseChart(props: Props) {
   const events = onPress
     ? [
         {
-          childName: "all",
-          target: "parent",
+          childName: 'all',
+          target: 'parent',
           eventHandlers: {
             onPress: () => {
               onPress();

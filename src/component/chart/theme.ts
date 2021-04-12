@@ -1,10 +1,10 @@
 // Colors
-export const yellow200 = "#FFF59D";
-export const deepOrange600 = "#F4511E";
-export const lime300 = "#DCE775";
-export const lightGreen500 = "#8BC34A";
-export const teal700 = "#00796B";
-export const cyan900 = "#006064";
+export const yellow200 = '#FFF59D';
+export const deepOrange600 = '#F4511E';
+export const lime300 = '#DCE775';
+export const lightGreen500 = '#8BC34A';
+export const teal700 = '#00796B';
+export const cyan900 = '#006064';
 const colors = [
   yellow200,
   lime300,
@@ -13,14 +13,14 @@ const colors = [
   teal700,
   cyan900,
 ];
-const blueGrey50 = "#ECEFF1";
-const blueGrey300 = "#90A4AE";
-const blueGrey700 = "#455A64";
-const grey900 = "#212121";
+const blueGrey50 = '#ECEFF1';
+const blueGrey300 = '#90A4AE';
+const blueGrey700 = '#455A64';
+const grey900 = '#212121';
 
 // Typography
 const sansSerif = "Helvetica Neue', Helvetica, sans-serif";
-const letterSpacing = "normal";
+const letterSpacing = 'normal';
 const fontSize = 12;
 
 // Layout
@@ -38,22 +38,22 @@ const baseLabelStyles = {
   letterSpacing,
   padding,
   fill: blueGrey700,
-  stroke: "transparent",
+  stroke: 'transparent',
   strokeWidth: 0,
 };
 
 const centeredLabelStyles = Object.assign(
-  { textAnchor: "middle" },
-  baseLabelStyles
+  { textAnchor: 'middle' },
+  baseLabelStyles,
 );
 
 // Strokes
-const strokeDasharray = "10, 5";
-const strokeLinecap = "round";
-const strokeLinejoin = "round";
+const strokeDasharray = '10, 5';
+const strokeLinecap = 'round';
+const strokeLinejoin = 'round';
 
 // Put it all together...
-const theme: any = {
+const theme = {
   area: Object.assign(
     {
       style: {
@@ -63,13 +63,13 @@ const theme: any = {
         labels: centeredLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   axis: Object.assign(
     {
       style: {
         axis: {
-          fill: "transparent",
+          fill: 'transparent',
           stroke: blueGrey300,
           strokeWidth: 2,
           strokeLinecap,
@@ -77,18 +77,18 @@ const theme: any = {
         },
         axisLabel: Object.assign({}, centeredLabelStyles, {
           padding,
-          stroke: "transparent",
+          stroke: 'transparent',
         }),
         grid: {
-          fill: "none",
+          fill: 'none',
           stroke: blueGrey50,
           strokeDasharray,
           strokeLinecap,
           strokeLinejoin,
-          pointerEvents: "painted",
+          pointerEvents: 'painted',
         },
         ticks: {
-          fill: "transparent",
+          fill: 'transparent',
           size: 5,
           stroke: blueGrey300,
           strokeWidth: 1,
@@ -100,7 +100,7 @@ const theme: any = {
         }),
       },
     },
-    baseProps
+    baseProps,
   ),
   bar: Object.assign(
     {
@@ -113,7 +113,7 @@ const theme: any = {
         labels: baseLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   boxplot: Object.assign(
     {
@@ -149,7 +149,7 @@ const theme: any = {
       },
       boxWidth: 20,
     },
-    baseProps
+    baseProps,
   ),
   candlestick: Object.assign(
     {
@@ -160,11 +160,11 @@ const theme: any = {
         labels: centeredLabelStyles,
       },
       candleColors: {
-        positive: "#ffffff",
+        positive: '#ffffff',
         negative: blueGrey700,
       },
     },
-    baseProps
+    baseProps,
   ),
   chart: baseProps,
   errorbar: Object.assign(
@@ -172,7 +172,7 @@ const theme: any = {
       borderWidth: 8,
       style: {
         data: {
-          fill: "transparent",
+          fill: 'transparent',
           opacity: 1,
           stroke: blueGrey700,
           strokeWidth: 2,
@@ -180,22 +180,22 @@ const theme: any = {
         labels: centeredLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   group: Object.assign(
     {
       colorScale: colors,
     },
-    baseProps
+    baseProps,
   ),
   legend: {
     colorScale: colors,
     gutter: 10,
-    orientation: "vertical",
-    titleOrientation: "top",
+    orientation: 'vertical',
+    titleOrientation: 'top',
     style: {
       data: {
-        type: "circle",
+        type: 'circle',
       },
       labels: baseLabelStyles,
       title: Object.assign({}, baseLabelStyles, { padding: 5 }),
@@ -205,7 +205,7 @@ const theme: any = {
     {
       style: {
         data: {
-          fill: "transparent",
+          fill: 'transparent',
           opacity: 1,
           stroke: blueGrey700,
           strokeWidth: 2,
@@ -213,7 +213,7 @@ const theme: any = {
         labels: centeredLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   pie: Object.assign(
     {
@@ -227,7 +227,7 @@ const theme: any = {
         labels: Object.assign({}, baseLabelStyles, { padding: 20 }),
       },
     },
-    baseProps
+    baseProps,
   ),
   scatter: Object.assign(
     {
@@ -235,30 +235,30 @@ const theme: any = {
         data: {
           fill: blueGrey700,
           opacity: 1,
-          stroke: "transparent",
+          stroke: 'transparent',
           strokeWidth: 0,
         },
         labels: centeredLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   stack: Object.assign(
     {
       colorScale: colors,
     },
-    baseProps
+    baseProps,
   ),
   tooltip: {
     style: Object.assign({}, centeredLabelStyles, {
       padding: 5,
-      pointerEvents: "none",
+      pointerEvents: 'none',
     }),
     flyoutStyle: {
       stroke: grey900,
       strokeWidth: 1,
-      fill: "#f0f0f0",
-      pointerEvents: "none",
+      fill: '#f0f0f0',
+      pointerEvents: 'none',
     },
     cornerRadius: 5,
     pointerLength: 10,
@@ -267,23 +267,23 @@ const theme: any = {
     {
       style: {
         data: {
-          fill: "transparent",
-          stroke: "transparent",
+          fill: 'transparent',
+          stroke: 'transparent',
           strokeWidth: 0,
         },
         labels: Object.assign({}, centeredLabelStyles, {
           padding: 5,
-          pointerEvents: "none",
+          pointerEvents: 'none',
         }),
         flyout: {
           stroke: grey900,
           strokeWidth: 1,
-          fill: "#f0f0f0",
-          pointerEvents: "none",
+          fill: '#f0f0f0',
+          pointerEvents: 'none',
         },
       },
     },
-    baseProps
+    baseProps,
   ),
 };
 

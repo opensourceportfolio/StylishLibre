@@ -1,11 +1,12 @@
-import { Button, Card, Input, Text } from "@ui-kitten/components";
-import * as React from "react";
-import { ActivityIndicator, Linking, StyleSheet, View } from "react-native";
-import { appLoginAsyncAction, appUpdateAction } from "../action";
-import { Status } from "../api/fetch";
-import Password from "../component/Password";
-import useAppState from "../hook/useAppState";
-import AsyncScreen from "./AsyncScreen";
+import { Button, Card, Input, Text } from '@ui-kitten/components';
+import * as React from 'react';
+import { ActivityIndicator, Linking, StyleSheet, View } from 'react-native';
+
+import { appLoginAsyncAction, appUpdateAction } from '../action';
+import { Status } from '../api/fetch';
+import Password from '../component/Password';
+import useAppState from '../hook/useAppState';
+import AsyncScreen from './AsyncScreen';
 
 export default function LoginScreen() {
   const [state, dispatch] = useAppState();
@@ -22,7 +23,7 @@ export default function LoginScreen() {
               onChangeText={(v) => dispatch(appUpdateAction({ email: v }))}
               placeholder="Your LibreView E-mail"
               style={styles.input}
-              textContentType={"emailAddress"}
+              textContentType={'emailAddress'}
               value={state.email}
             />
             <Password
@@ -44,13 +45,13 @@ export default function LoginScreen() {
           </View>
           <Card>
             <Text>
-              Please first create an account on{" "}
+              Please first create an account on{' '}
               <Text
-                style={{ color: "blue" }}
-                onPress={() => Linking.openURL("http://libreview.com")}
+                style={{ color: 'blue' }}
+                onPress={() => Linking.openURL('http://libreview.com')}
               >
-                {" "}
-                LibreView.com{" "}
+                {' '}
+                LibreView.com{' '}
               </Text>
               before proceeding.
             </Text>
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
   button: { marginBottom: 40 },
   loginForm: {},
   loginScreen: {
-    width: "100%",
+    width: '100%',
     padding: 20,
   },
 });

@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import {
   RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
-} from "react-native";
+} from 'react-native';
 
 interface Props {
   children: JSX.Element;
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

@@ -4,7 +4,7 @@ export interface DataPoint {
 }
 
 export interface GlucoseData {
-  AverageGlucose: number,
+  AverageGlucose: number;
   Date: number;
   SensorScans: DataPoint[];
   Glucose: DataPoint[][];

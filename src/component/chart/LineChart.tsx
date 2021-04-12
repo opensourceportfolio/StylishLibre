@@ -1,13 +1,8 @@
-import React from "react";
-import { Dimensions, View } from "react-native";
-import {
-  VictoryChart,
-  VictoryLine,
-  VictoryStack,
-  VictoryGroup,
-} from "victory-native";
-import theme, { deepOrange600, teal700 } from "./theme";
-import { min, max, sum } from "../../transformation/collection";
+import React from 'react';
+import { VictoryGroup, VictoryLine } from 'victory-native';
+
+import { max, min, sum } from '../../transformation/collection';
+import theme, { deepOrange600, teal700 } from './theme';
 
 export interface DataPoint {
   x: number;
@@ -58,7 +53,7 @@ export default function LineChart(props: Props) {
         style={{
           data: {
             stroke: teal700,
-            strokeDasharray: "2"
+            strokeDasharray: '2',
           },
         }}
         x="x"

@@ -1,4 +1,4 @@
-import { GlucoseData } from "./api/glucose-data";
+import { GlucoseData } from './api/glucose-data';
 
 export interface PersistentState {
   glucoseData: GlucoseData[];

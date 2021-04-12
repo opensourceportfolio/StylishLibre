@@ -1,4 +1,4 @@
-import ChartRange from "./chart-range";
+import ChartRange from './chart-range';
 
 export default interface ChartStream {
   chartRanges: ChartRange[];

@@ -1,9 +1,10 @@
-import { Card, Text } from "@ui-kitten/components";
-import * as React from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
-import ChartDay from "../../model/chart/chart-day";
-import { toPercent } from "../../transformation/number";
-import LineChart from "../chart/LineChart";
+import { Card, Text } from '@ui-kitten/components';
+import * as React from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
+
+import ChartDay from '../../model/chart/chart-day';
+import { toPercent } from '../../transformation/number';
+import LineChart from '../chart/LineChart';
 
 interface Props {
   chartDay: ChartDay | null;
@@ -16,12 +17,12 @@ export default function GlucoseRange(props: Props) {
 
   const status =
     chartDay === null
-      ? "basic"
+      ? 'basic'
       : chartDay.inRange < 0.3
-      ? "danger"
+      ? 'danger'
       : chartDay.inRange < 0.7
-      ? "warning"
-      : "success";
+      ? 'warning'
+      : 'success';
 
   return (
     <Card style={styles.card} status={status}>
@@ -29,7 +30,7 @@ export default function GlucoseRange(props: Props) {
         <View>
           <Text category="c2">Glucose in range</Text>
           <Text category="h1">
-            {chartDay ? toPercent(chartDay.inRange) : "-"}
+            {chartDay ? toPercent(chartDay.inRange) : '-'}
           </Text>
         </View>
         <View>{data && <LineChart data={data}></LineChart>}</View>
@@ -40,12 +41,12 @@ export default function GlucoseRange(props: Props) {
 
 const styles = StyleSheet.create({
   cardLayout: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   card: {
     marginBottom: 10,
-    width: Dimensions.get("window").width,
+    width: Dimensions.get('window').width,
   },
 });

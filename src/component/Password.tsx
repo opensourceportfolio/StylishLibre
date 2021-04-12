@@ -1,15 +1,15 @@
-import { Icon, InputProps, Input } from "@ui-kitten/components";
-import * as React from "react";
-import { TouchableWithoutFeedback } from "react-native";
+import { Icon, Input, InputProps } from '@ui-kitten/components';
+import * as React from 'react';
+import { TouchableWithoutFeedback } from 'react-native';
 
 const AlertIcon = () => <Icon name="alert-circle-outline" />;
 
 const renderIcon = (
   toggleSecureEntry: () => void,
-  secureTextEntry: boolean
+  secureTextEntry: boolean,
 ) => (
   <TouchableWithoutFeedback onPress={toggleSecureEntry}>
-    <Icon name={secureTextEntry ? "eye-off" : "eye"} />
+    <Icon name={secureTextEntry ? 'eye-off' : 'eye'} />
   </TouchableWithoutFeedback>
 );
 

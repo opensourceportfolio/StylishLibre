@@ -1,11 +1,12 @@
-import { Entypo, Feather } from "@expo/vector-icons";
-import { Button, Divider, Input, Text } from "@ui-kitten/components";
-import * as React from "react";
-import { StyleSheet, View } from "react-native";
-import { appLogoutAsyncAction, appUpdateAction } from "../action";
-import ListItem from "../component/ListItem";
-import useAppState from "../hook/useAppState";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Entypo, Feather } from '@expo/vector-icons';
+import { Button, Divider, Input, Text } from '@ui-kitten/components';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { appLogoutAsyncAction, appUpdateAction } from '../action';
+import ListItem from '../component/ListItem';
+import useAppState from '../hook/useAppState';
 
 export default function AccountScreen() {
   const [{ email, minimumGlucose, maximumGlucose }, dispatch] = useAppState();
@@ -80,7 +81,7 @@ export default function AccountScreen() {
 const styles = StyleSheet.create({
   accountScreen: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   numberInput: {
     width: 80,

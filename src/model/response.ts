@@ -1,10 +1,10 @@
 export interface Success<T> {
-  type: "success";
+  type: 'success';
   data: T;
 }
 
 export interface Failure {
-  type: "failure";
+  type: 'failure';
   reason?: string;
   args?: string;
   data?: string;

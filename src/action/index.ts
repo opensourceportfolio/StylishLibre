@@ -1,14 +1,15 @@
-import { Action } from "redux";
-import { ThunkAction as ReduxThunkAction } from "redux-thunk";
-import { success } from "../api/fetch";
-import { getGlucoseData } from "../api/getGlucoseData";
-import { login } from "../api/login";
-import { PayloadAction } from "../model/action";
-import { GlucoseData } from "../model/api/glucose-data";
-import { PersistentState } from "../model/persistent-state";
-import { Attempt } from "../model/response";
-import { State } from "../model/state";
-import { deleteState, readState } from "../store/persistent-state";
+import { Action } from 'redux';
+import { ThunkAction as ReduxThunkAction } from 'redux-thunk';
+
+import { success } from '../api/fetch';
+import { getGlucoseData } from '../api/getGlucoseData';
+import { login } from '../api/login';
+import { PayloadAction } from '../model/action';
+import { GlucoseData } from '../model/api/glucose-data';
+import { PersistentState } from '../model/persistent-state';
+import { Attempt } from '../model/response';
+import { State } from '../model/state';
+import { deleteState, readState } from '../store/persistent-state';
 
 type ThunkAction<T extends Action, R> = ReduxThunkAction<
   Attempt<R>,
@@ -17,13 +18,14 @@ type ThunkAction<T extends Action, R> = ReduxThunkAction<
   T
 >;
 
-const appLoadedType = "app/loaded";
+const appLoadedType = 'app/loaded';
+
 export type AppLoadedAction = PayloadAction<
   typeof appLoadedType,
   PersistentState | null
 >;
 function appLoadedAction(
-  persistentState: PersistentState | null
+  persistentState: PersistentState | null,
 ): AppLoadedAction {
   return {
     type: appLoadedType,
@@ -31,7 +33,8 @@ function appLoadedAction(
   };
 }
 
-const appLoginType = "app/login";
+const appLoginType = 'app/login';
+
 export type AppLoginAction = PayloadAction<typeof appLoginType, string>;
 function appLoginAction(token: string): AppLoginAction {
   return {
@@ -40,7 +43,8 @@ function appLoginAction(token: string): AppLoginAction {
   };
 }
 
-const appLogoutType = "app/logout";
+const appLogoutType = 'app/logout';
+
 export type AppLogoutAction = Action<typeof appLogoutType>;
 function appLogoutAction(): AppLogoutAction {
   return {
@@ -61,7 +65,8 @@ export function persistenceStorageLoadingAsyncAction(): ThunkAction<
   };
 }
 
-const appUpdateType = "app/update";
+const appUpdateType = 'app/update';
+
 export type AppUpdateAction = PayloadAction<
   typeof appUpdateType,
   Partial<State>
@@ -75,12 +80,12 @@ export function appUpdateAction(payload: Partial<State>): AppUpdateAction {
 
 export function appLoginAsyncAction(
   email: string,
-  password: string
+  password: string,
 ): ThunkAction<AppLoginAction, string> {
   return async (dispatch) => {
     const res = await login(email, password);
 
-    if (res.type === "success") {
+    if (res.type === 'success') {
       dispatch(appLoginAction(res.data));
     }
 
@@ -98,7 +103,7 @@ export function appLogoutAsyncAction(): ThunkAction<AppLogoutAction, void> {
 }
 
 export function getGlucoseAsyncAction(
-  token: string | undefined
+  token: string | undefined,
 ): ThunkAction<AppUpdateAction, GlucoseData[]> {
   return async (dispatch, getState) => {
     const currentState = getState();
@@ -106,13 +111,14 @@ export function getGlucoseAsyncAction(
       ? success(token)
       : await login(currentState.email, currentState.password);
 
-    if (tokenAttempt.type === "success") {
+    if (tokenAttempt.type === 'success') {
       const glucoseDataAttempt = await getGlucoseData(tokenAttempt.data);
 
-      if (glucoseDataAttempt && glucoseDataAttempt.type === "success") {
+      if (glucoseDataAttempt && glucoseDataAttempt.type === 'success') {
         const successState = {
           glucoseData: glucoseDataAttempt.data,
         };
+
         console.log({ successState });
 
         dispatch(appUpdateAction({ ...successState }));
@@ -123,7 +129,7 @@ export function getGlucoseAsyncAction(
       }
     }
 
-    return { type: "failure" };
+    return { type: 'failure' };
   };
 }
 

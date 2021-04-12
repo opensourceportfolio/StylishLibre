@@ -1,7 +1,7 @@
 export function getTime(epoch: number): string {
   const date = new Date(epoch * 1000);
 
-  return new Intl.DateTimeFormat("en-US").format(date);
+  return new Intl.DateTimeFormat('en-US').format(date);
 }
 
 export function getHour(epoch: number): number {
@@ -11,7 +11,7 @@ export function getHour(epoch: number): number {
 }
 
 export function formatHour(hour24: number): string {
-  return hour24 > 12 ? hour24 - 12 + "pm" : hour24 + "am";
+  return hour24 > 12 ? `${hour24 - 12}pm` : `${hour24}am`;
 }
 
 export function getHourRange(from: number, to: number, skip: number): number[] {

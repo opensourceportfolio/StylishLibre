@@ -1,4 +1,4 @@
-import ChartPoint from "./chart-point";
+import ChartPoint from './chart-point';
 
 export default interface ChartRange {
   lowRange: ChartPoint[];

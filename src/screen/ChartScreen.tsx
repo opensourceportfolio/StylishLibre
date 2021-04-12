@@ -1,17 +1,18 @@
-import * as React from "react";
-import { StyleSheet, View } from "react-native";
-import GlucoseChart from "../component/chart/GlucoseChart";
-import useAppState from "../hook/useAppState";
-import useGlucoseRange from "../hook/useGlucoseRange";
-import { toChartDays } from "../transformation/api";
-import { SafeAreaView } from "react-native-safe-area-context";
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import GlucoseChart from '../component/chart/GlucoseChart';
+import useAppState from '../hook/useAppState';
+import useGlucoseRange from '../hook/useGlucoseRange';
+import { toChartDays } from '../transformation/api';
 
 export default function ChartScreen() {
   const [state] = useAppState();
   const [minGlucose, maxGlucose] = useGlucoseRange();
   const chartDays = React.useMemo(
     () => toChartDays(minGlucose, maxGlucose)(state.glucoseData),
-    [state.glucoseData, minGlucose, maxGlucose]
+    [state.glucoseData, minGlucose, maxGlucose],
   );
 
   const today = chartDays.length > 0 ? chartDays[chartDays.length - 1] : null;
@@ -25,9 +26,9 @@ export default function ChartScreen() {
 
 const styles = StyleSheet.create({
   centeredView: {
-    alignItems: "center",
+    alignItems: 'center',
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
     paddingTop: 20,
     paddingBottom: 20,
   },

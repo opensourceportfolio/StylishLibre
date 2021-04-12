@@ -1,5 +1,6 @@
-import AsyncStorage from "@react-native-community/async-storage";
-import { PersistentState } from "../model/persistent-state";
+import AsyncStorage from '@react-native-community/async-storage';
+
+import { PersistentState } from '../model/persistent-state';
 
 function safeJsonParse<T>(input: string | null): T | null {
   try {
@@ -9,13 +10,12 @@ function safeJsonParse<T>(input: string | null): T | null {
   }
 }
 
-export const key = "@StylishLibre/appConfig";
+export const key = '@StylishLibre/appConfig';
 
 export function readState(): Promise<PersistentState | null> {
-  return AsyncStorage.getItem("@StylishLibre/appConfig")
-    .then((res) => {
-      return safeJsonParse<PersistentState>(res);
-    });
+  return AsyncStorage.getItem('@StylishLibre/appConfig').then((res) => {
+    return safeJsonParse<PersistentState>(res);
+  });
 }
 
 export async function writeState(state: Partial<PersistentState>) {

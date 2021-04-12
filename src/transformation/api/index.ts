@@ -1,13 +1,13 @@
-import { DataPoint, GlucoseData } from "../../model/api/glucose-data";
-import ChartDay from "../../model/chart/chart-day";
-import ChartPoint from "../../model/chart/chart-point";
-import ChartRange from "../../model/chart/chart-range";
-import ChartStream from "../../model/chart/chart-stream";
-import { countIf, last, max, min, sum, standardDeviation } from "../collection";
+import { DataPoint, GlucoseData } from '../../model/api/glucose-data';
+import ChartDay from '../../model/chart/chart-day';
+import ChartPoint from '../../model/chart/chart-point';
+import ChartRange from '../../model/chart/chart-range';
+import ChartStream from '../../model/chart/chart-stream';
+import { countIf, last, max, min, standardDeviation, sum } from '../collection';
 
 export function toChartDays(
   minGlucose: number,
-  maxGlucose: number
+  maxGlucose: number,
 ): (gs: GlucoseData[]) => ChartDay[] {
   return (glucoseData: GlucoseData[]) =>
     glucoseData.flatMap((g) => {
@@ -19,7 +19,7 @@ export function toChartDays(
 
 export function toChartStream(
   minGlucose: number,
-  maxGlucose: number
+  maxGlucose: number,
 ): (gs: GlucoseData[]) => ChartStream {
   return (glucoseData: GlucoseData[]) => {
     const chartDays = toChartDays(minGlucose, maxGlucose)(glucoseData);
@@ -45,7 +45,7 @@ export function toChartStream(
 
 function toChartDay(
   minGlucose: number,
-  maxGlucose: number
+  maxGlucose: number,
 ): (g: GlucoseData) => ChartDay | null {
   return (glucoseData: GlucoseData): ChartDay | null => {
     const dateRanges = createDataRanges(minGlucose, maxGlucose);
@@ -75,29 +75,32 @@ function toChartDay(
 
     const inRangeChartPoints = sum(
       (c) => countIf((u) => u.glucose === 0, c.upperRange),
-      chartRanges
+      chartRanges,
     );
 
     const totalChartPoints = sum((c) => c.upperRange.length, chartRanges);
 
     return chartRanges.length > 0
       ? {
-        average: glucoseData.AverageGlucose,
-        chartRanges,
-        end: chartRanges[chartRanges.length - 1].end,
-        min: min((c) => c.min, chartRanges),
-        max: max((c) => c.max, chartRanges),
-        last: last(
-          (c) => last((g) => g.glucose, c.glucoseReading, 0),
+          average: glucoseData.AverageGlucose,
           chartRanges,
-          0
-        ),
-        standardDeviation: standardDeviation(glucoseData.AverageGlucose, glucosePoints.flatMap(gps => gps.map(gp => gp.glucose))),
-        start: chartRanges[0].start,
-        sensorScans,
-        inRange:
-          totalChartPoints === 0 ? 0 : inRangeChartPoints / totalChartPoints,
-      }
+          end: chartRanges[chartRanges.length - 1].end,
+          min: min((c) => c.min, chartRanges),
+          max: max((c) => c.max, chartRanges),
+          last: last(
+            (c) => last((g) => g.glucose, c.glucoseReading, 0),
+            chartRanges,
+            0,
+          ),
+          standardDeviation: standardDeviation(
+            glucoseData.AverageGlucose,
+            glucosePoints.flatMap((gps) => gps.map((gp) => gp.glucose)),
+          ),
+          start: chartRanges[0].start,
+          sensorScans,
+          inRange:
+            totalChartPoints === 0 ? 0 : inRangeChartPoints / totalChartPoints,
+        }
       : null;
   };
 }
@@ -107,7 +110,7 @@ function toChartPoint(dataPoints: DataPoint[]): ChartPoint[] {
     (dataPoint): ChartPoint => ({
       glucose: dataPoint.Value,
       timestamp: dataPoint.Timestamp,
-    })
+    }),
   );
 }
 
@@ -121,7 +124,7 @@ export function createDataRanges(minGlucose: number, maxGlucose: number) {
     const normalRange: ChartPoint[] = chartPoints.map((c) => ({
       glucose: Math.min(
         maxGlucose - minGlucose,
-        c.glucose - Math.min(minGlucose, c.glucose)
+        c.glucose - Math.min(minGlucose, c.glucose),
       ),
       timestamp: c.timestamp,
     }));

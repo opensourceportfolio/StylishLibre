@@ -1,8 +1,8 @@
-import defaultState from "../model/state";
-import useAppState from "./useAppState";
+import defaultState from '../model/state';
+import useAppState from './useAppState';
 
 export default function useGlucoseRange(): [number, number] {
-  const [state, dispatch] = useAppState();
+  const [state] = useAppState();
   const minGlucose =
     parseInt(state.minimumGlucose) || parseInt(defaultState.minimumGlucose);
   const maxGlucose =

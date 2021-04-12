@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { Provider } from "react-redux";
-import { Store } from "redux";
-import { AppDispatch } from ".";
-import { Actions, persistenceStorageLoadingAsyncAction } from "../action";
-import { State } from "../model/state";
-import { writeState } from "./persistent-state";
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { Store } from 'redux';
+
+import { Actions, persistenceStorageLoadingAsyncAction } from '../action';
+import { State } from '../model/state';
+import { AppDispatch } from '.';
+import { writeState } from './persistent-state';
 
 interface Props {
   store: Store<State, Actions>;
@@ -25,12 +26,12 @@ export const StoreProvider = (props: Props) => {
   const dispatch: AppDispatch = store.dispatch;
   const writeStateThrottled = throttle(
     () => writeState(store.getState()),
-    1000
+    1000,
   );
-
 
   useEffect(() => {
     const unsubscribe = store.subscribe(writeStateThrottled);
+
     dispatch(persistenceStorageLoadingAsyncAction());
 
     return unsubscribe;
